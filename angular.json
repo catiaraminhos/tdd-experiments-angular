@@ -33,7 +33,16 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/uikit/src/scss"
+              ]
+            },
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/uikit/dist/js/uikit.min.js",
+              "node_modules/uikit/dist/js/uikit-icons.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -96,7 +105,16 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": []
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "node_modules/uikit/src/scss"
+              ]
+            },
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/uikit/dist/js/uikit.min.js",
+              "node_modules/uikit/dist/js/uikit-icons.min.js"
+            ]
           }
         },
         "lint": {
