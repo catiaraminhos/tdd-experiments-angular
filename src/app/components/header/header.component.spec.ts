@@ -37,4 +37,20 @@ describe('HeaderComponent', () => {
     const menuElement = fixture.nativeElement.querySelector('[data-test="menu"]');
     expect(menuElement).toBeTruthy();
   });
+
+  it('should show filters', () => {
+    const homeTypeFilterElem = fixture.nativeElement.querySelector('[data-test="home-type"]');
+    const datesFilterElem = fixture.nativeElement.querySelector('[data-test="dates"]');
+    const guestsFilterElem = fixture.nativeElement.querySelector('[data-test="guests"]');
+    const priceFilterElem = fixture.nativeElement.querySelector('[data-test="price"]');
+    const roomsFilterElem = fixture.nativeElement.querySelector('[data-test="rooms"]');
+    const amenitiesFilterElem = fixture.nativeElement.querySelector('[data-test="amenities"]');
+
+    expect(homeTypeFilterElem).toBeTruthy();
+    expect(datesFilterElem).toBeTruthy();
+    expect(guestsFilterElem).toBeTruthy();
+    expect(priceFilterElem).toBeTruthy();
+    expect(roomsFilterElem).toBeTruthy();
+    expect(amenitiesFilterElem).toBeTruthy();
+  });
 });
