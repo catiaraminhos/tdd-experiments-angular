@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Observable, of } from 'rxjs';
+
+import { Home } from 'src/app/models/home.model';
+import { HomesService } from 'src/app/services/homes.service';
 
 @Component({
   selector: 'app-homes',
@@ -7,9 +11,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomesComponent implements OnInit {
 
-  constructor() { }
+  homes$: Observable<Home[]> = of([]);
+
+  constructor(private homesService: HomesService) { }
 
   ngOnInit(): void {
+    this.homes$ = this.homesService.getHomes$();
   }
 
 }
