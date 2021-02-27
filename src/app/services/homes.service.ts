@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 import { Home } from '../models/home.model';
 
@@ -8,9 +9,9 @@ import { Home } from '../models/home.model';
 })
 export class HomesService {
 
-  constructor() { }
+  constructor(private httpClient: HttpClient) { }
 
   getHomes$(): Observable<Home[]> {
-    return of([]);
+    return this.httpClient.get<any>('assets/homes.json');
   }
 }
