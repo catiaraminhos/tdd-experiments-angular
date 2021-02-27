@@ -2,6 +2,7 @@ import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { Observable, of } from 'rxjs';
 
 import { Home } from '../../models/home.model';
+import { HomesMock } from '../../services/homes.mock';
 import { HomesService } from '../../services/homes.service';
 import { HomesComponent } from './homes.component';
 
@@ -12,23 +13,7 @@ describe('HomesComponent', () => {
   beforeEach(async () => {
     const homesServiceStub: Partial<HomesService> = {
       getHomes$(): Observable<Home[]> {
-        return of([
-          {
-            title: 'Home 1',
-            image: 'assets/listing.jpg',
-            location: 'new york'
-          },
-          {
-            title: 'Home 2',
-            image: 'assets/listing.jpg',
-            location: 'boston'
-          },
-          {
-            title: 'Home 3',
-            image: 'assets/listing.jpg',
-            location: 'chicago'
-          }
-        ]);
+        return of(HomesMock.homes);
       }
     };
 
@@ -45,10 +30,6 @@ describe('HomesComponent', () => {
     fixture = TestBed.createComponent(HomesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
   });
 
   it('should show homes', waitForAsync(() => {
