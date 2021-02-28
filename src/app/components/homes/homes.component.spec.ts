@@ -58,7 +58,14 @@ describe('HomesComponent', () => {
 
   it('should use dialog service to open a dialog when clicking on Book button', () => {
     const bookButton = fixture.nativeElement.querySelector('[data-test="home"] [data-test="book-btn"] button');
+    const dialogConfig = {
+      width: '250px',
+      data: {
+        home: HomesMock.homes[0]
+       }
+    };
+
     bookButton.click();
-    expect(dialogServiceSpy.open).toHaveBeenCalledWith(BookComponent, {});
+    expect(dialogServiceSpy.open).toHaveBeenCalledWith(BookComponent, dialogConfig);
   });
 });

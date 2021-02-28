@@ -22,7 +22,10 @@ export class HomesComponent implements OnInit {
     this.homes$ = this.homesService.getHomes$();
   }
 
-  openDialog(): void {
-    this.dialogService.open(BookComponent, {});
+  openDialog(home: Home): void {
+    this.dialogService.open(BookComponent, {
+      width: '250px',
+      data: { home }
+    });
   }
 }
