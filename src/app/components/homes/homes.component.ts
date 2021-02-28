@@ -4,6 +4,7 @@ import { Observable, of } from 'rxjs';
 import { Home } from '../../models/home.model';
 import { DialogService } from '../../services/dialog.service';
 import { HomesService } from '../../services/homes.service';
+import { BookComponent } from '../book/book.component';
 
 @Component({
   selector: 'app-homes',
@@ -22,6 +23,6 @@ export class HomesComponent implements OnInit {
   }
 
   openDialog(): void {
-    this.dialogService.open();
+    this.dialogService.open(BookComponent, {});
   }
 }

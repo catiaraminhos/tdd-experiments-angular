@@ -6,6 +6,7 @@ import { DialogService } from '../../services/dialog.service';
 import { HomesMock } from '../../services/homes.mock';
 import { HomesService } from '../../services/homes.service';
 import { HomesComponent } from './homes.component';
+import { BookComponent } from '../book/book.component';
 
 describe('HomesComponent', () => {
   let component: HomesComponent;
@@ -58,6 +59,6 @@ describe('HomesComponent', () => {
   it('should use dialog service to open a dialog when clicking on Book button', () => {
     const bookButton = fixture.nativeElement.querySelector('[data-test="home"] [data-test="book-btn"] button');
     bookButton.click();
-    expect(dialogServiceSpy.open).toHaveBeenCalled();
+    expect(dialogServiceSpy.open).toHaveBeenCalledWith(BookComponent, {});
   });
 });
