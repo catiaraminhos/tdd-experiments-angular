@@ -2,6 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import * as moment from 'moment';
 
+import { HomesService } from 'src/app/services/homes.service';
 import { Home } from '../../models/home.model';
 
 @Component({
@@ -16,7 +17,7 @@ export class BookComponent implements OnInit {
 
   checkOut: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private homesService: HomesService) {
   }
 
   ngOnInit(): void {
@@ -28,11 +29,10 @@ export class BookComponent implements OnInit {
     const checkOutDate = moment(checkOut, 'MM-DD-YY');
     const nrNights = checkOutDate.diff(checkInDate, 'days');
 
-    console.log("check in", checkIn);
-    console.log("check out", checkOut);
-    console.log("home price", this.home.price);
-    console.log("nrNights", nrNights);
-
     return nrNights * parseInt(this.home.price, 10);
+  }
+
+  bookHome(): void {
+    this.homesService.bookHome$().subscribe();
   }
 }

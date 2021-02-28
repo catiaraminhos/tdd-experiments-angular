@@ -29,4 +29,13 @@ describe('HomesService', () => {
 
     expect(httpClient.get).toHaveBeenCalledWith('assets/homes.json');
   });
+
+  it('should book the home', () => {
+    spyOn(httpClient, 'post').and.returnValue(of('success'));
+
+    const bookHomeResultSpy = jasmine.createSpy('bookHomeResultSpy');
+    homesService.bookHome$().subscribe(bookHomeResultSpy);
+
+    expect(bookHomeResultSpy).toHaveBeenCalledWith('success');
+  });
 });
