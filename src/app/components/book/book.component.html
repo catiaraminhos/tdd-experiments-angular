@@ -1,2 +1,4 @@
-<div data-test="title" *ngIf="home">{{home.title}}</div>
-<div data-test="price" *ngIf="home">{{home.price}}</div>
+<ng-container *ngIf="home">
+    <div data-test="title">{{home.title}}</div>
+    <div data-test="price">{{home.price}}</div>
+</ng-container>
