@@ -8,6 +8,8 @@ describe('BookComponent', () => {
   let component: BookComponent;
   let fixture: ComponentFixture<BookComponent>;
 
+  const getElement = (selector: string) => fixture.nativeElement.querySelector(selector);
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [ BookComponent ],
@@ -26,8 +28,7 @@ describe('BookComponent', () => {
   });
 
   it('should show title', () => {
-    const titleElem = fixture.nativeElement.querySelector('[data-test="title"]');
-    expect(titleElem.textContent).toContain(HomesMock.homes[0].title);
+    expect(getElement('[data-test="title"]').textContent).toContain(HomesMock.homes[0].title);
   });
 
   // should show price

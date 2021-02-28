@@ -14,6 +14,8 @@ describe('HomesComponent', () => {
   let homesServiceSpy: jasmine.SpyObj<HomesService>;
   let dialogServiceSpy: jasmine.SpyObj<DialogService>;
 
+  const getElement = (selector: string) => fixture.nativeElement.querySelector(selector);
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       declarations: [HomesComponent],
@@ -41,10 +43,9 @@ describe('HomesComponent', () => {
   });
 
   it('should show home info', () => {
-    const firstHomeElem = fixture.nativeElement.querySelector('[data-test="home"]');
-    const homeTitleElem = firstHomeElem.querySelector('[data-test="title"]');
-    const homeImageElem = firstHomeElem.querySelector('[data-test="image"]');
-    const homeLocationElem = firstHomeElem.querySelector('[data-test="location"]');
+    const homeTitleElem = getElement('[data-test="home"] [data-test="title"]');
+    const homeImageElem = getElement('[data-test="home"] [data-test="image"]');
+    const homeLocationElem = getElement('[data-test="home"] [data-test="location"]');
 
     expect(homeTitleElem.innerText).toBe('Home 1');
     expect(homeImageElem.src.endsWith('assets/listing.jpg')).toBeTrue();
@@ -52,12 +53,12 @@ describe('HomesComponent', () => {
   });
 
   it('should show Book button', () => {
-    const bookButtonElem = fixture.nativeElement.querySelector('[data-test="home"] [data-test="book-btn"]');
+    const bookButtonElem = getElement('[data-test="home"] [data-test="book-btn"]');
     expect(bookButtonElem).toBeTruthy();
   });
 
   it('should use dialog service to open a dialog when clicking on Book button', () => {
-    const bookButton = fixture.nativeElement.querySelector('[data-test="home"] [data-test="book-btn"] button');
+    const bookButton = getElement('[data-test="home"] [data-test="book-btn"] button');
     const dialogConfig = {
       width: '250px',
       data: {
