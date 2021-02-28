@@ -18,12 +18,12 @@ describe('HomesComponent', () => {
     };
 
     await TestBed.configureTestingModule({
-      declarations: [ HomesComponent ],
+      declarations: [HomesComponent],
       providers: [
         { provide: HomesService, useValue: homesServiceStub }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -32,23 +32,19 @@ describe('HomesComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should show homes', waitForAsync(() => {
-    fixture.whenStable().then(() => {
-      const homeElems = fixture.nativeElement.querySelectorAll('[data-test="home"]');
-      expect(homeElems.length).toBe(3);
-    });
-  }));
+  it('should show homes', () => {
+    const homeElems = fixture.nativeElement.querySelectorAll('[data-test="home"]');
+    expect(homeElems.length).toBe(3);
+  });
 
-  it('should show home info', waitForAsync(() => {
-    fixture.whenStable().then(() => {
-      const firstHomeElem = fixture.nativeElement.querySelector('[data-test="home"]');
-      const homeTitleElem = firstHomeElem.querySelector('[data-test="title"]');
-      const homeImageElem = firstHomeElem.querySelector('[data-test="image"]');
-      const homeLocationElem = firstHomeElem.querySelector('[data-test="location"]');
+  it('should show home info', () => {
+    const firstHomeElem = fixture.nativeElement.querySelector('[data-test="home"]');
+    const homeTitleElem = firstHomeElem.querySelector('[data-test="title"]');
+    const homeImageElem = firstHomeElem.querySelector('[data-test="image"]');
+    const homeLocationElem = firstHomeElem.querySelector('[data-test="location"]');
 
-      expect(homeTitleElem.innerText).toBe('Home 1');
-      expect(homeImageElem.src.endsWith('assets/listing.jpg')).toBeTrue();
-      expect(homeLocationElem.innerText).toBe('new york');
-    });
-  }));
+    expect(homeTitleElem.innerText).toBe('Home 1');
+    expect(homeImageElem.src.endsWith('assets/listing.jpg')).toBeTrue();
+    expect(homeLocationElem.innerText).toBe('new york');
+  });
 });
