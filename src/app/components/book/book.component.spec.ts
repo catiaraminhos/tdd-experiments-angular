@@ -15,6 +15,12 @@ describe('BookComponent', () => {
 
   const getElement = (selector: string) => fixture.nativeElement.querySelector(selector);
 
+  const setInputValue = (selector: string, value: string) => {
+    const input = getElement(selector);
+    input.value = value;
+    input.dispatchEvent(new Event('input'));
+  };
+
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [ FormsModule ],
@@ -52,13 +58,8 @@ describe('BookComponent', () => {
   });
 
   it('should show total', () => {
-    const checkIn = getElement('[data-test="check-in"] input');
-    checkIn.value = '12/20/19';
-    checkIn.dispatchEvent(new Event('input'));
-
-    const checkOut = getElement('[data-test="check-out"] input');
-    checkOut.value = '12/23/19';
-    checkOut.dispatchEvent(new Event('input'));
+    setInputValue('[data-test="check-in"] input', '12/20/19');
+    setInputValue('[data-test="check-out"] input', '12/23/19');
 
     fixture.detectChanges();
 
@@ -68,13 +69,8 @@ describe('BookComponent', () => {
   it('should book home after clicking the Book button', () => {
     homesServiceSpy.bookHome$.and.returnValue(of(null));
 
-    const checkIn = getElement('[data-test="check-in"] input');
-    checkIn.value = '12/20/19';
-    checkIn.dispatchEvent(new Event('input'));
-
-    const checkOut = getElement('[data-test="check-out"] input');
-    checkOut.value = '12/23/19';
-    checkOut.dispatchEvent(new Event('input'));
+    setInputValue('[data-test="check-in"] input', '12/20/19');
+    setInputValue('[data-test="check-out"] input', '12/23/19');
 
     fixture.detectChanges();
 
