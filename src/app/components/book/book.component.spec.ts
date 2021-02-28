@@ -35,9 +35,13 @@ describe('BookComponent', () => {
     expect(getElement('[data-test="price"').textContent).toContain(HomesMock.homes[0].price);
   });
 
-  // should show check in date field
+  it('should show check in date field', () => {
+    expect(getElement('[data-test="check-in"')).toBeTruthy();
+  });
 
-  // should check out date field
+  it('should show check out date field', () => {
+    expect(getElement('[data-test="check-out"')).toBeTruthy();
+  });
 
   // should show total
 
