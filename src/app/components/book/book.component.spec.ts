@@ -1,17 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { spyOnClass } from 'jasmine-es6-spies';
 import { of } from 'rxjs';
 
 import { HomesService } from '../../services/homes.service';
 import { HomesMock } from '../../services/homes.mock';
 import { BookComponent } from './book.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 describe('BookComponent', () => {
   let component: BookComponent;
   let fixture: ComponentFixture<BookComponent>;
   let homesServiceSpy: jasmine.SpyObj<HomesService>;
+  let matDialogSpy: jasmine.SpyObj<MatDialogRef<BookComponent>>;
+  let matSnackBarSpy: jasmine.SpyObj<MatSnackBar>;
 
   const getElement = (selector: string) => fixture.nativeElement.querySelector(selector);
 
@@ -27,7 +30,9 @@ describe('BookComponent', () => {
       declarations: [ BookComponent ],
       providers: [
         { provide: MAT_DIALOG_DATA, useValue: {} },
-        { provide: HomesService, useFactory: () => spyOnClass(HomesService) }
+        { provide: HomesService, useFactory: () => spyOnClass(HomesService) },
+        { provide: MatDialogRef, useFactory: () => spyOnClass(MatDialogRef) },
+        { provide: MatSnackBar, useFactory: () => spyOnClass(MatSnackBar) }
       ]
     })
     .compileComponents();
@@ -35,6 +40,8 @@ describe('BookComponent', () => {
 
   beforeEach(() => {
     homesServiceSpy = TestBed.inject(HomesService) as jasmine.SpyObj<HomesService>;
+    matDialogSpy = TestBed.inject(MatDialogRef) as jasmine.SpyObj<MatDialogRef<BookComponent>>;
+    matSnackBarSpy = TestBed.inject(MatSnackBar) as jasmine.SpyObj<MatSnackBar>;
     fixture = TestBed.createComponent(BookComponent);
     component = fixture.componentInstance;
     TestBed.inject(MAT_DIALOG_DATA).home = HomesMock.homes[0];
@@ -77,5 +84,18 @@ describe('BookComponent', () => {
     getElement('[data-test="book-btn"] button').click();
 
     expect(homesServiceSpy.bookHome$).toHaveBeenCalled();
+  });
+
+  it('should close the dialog and show notification after clicking Book button', () => {
+    homesServiceSpy.bookHome$.and.returnValue(of(null));
+
+    setInputValue('[data-test="check-in"] input', '12/20/19');
+    setInputValue('[data-test="check-out"] input', '12/23/19');
+
+    fixture.detectChanges();
+
+    getElement('[data-test="book-btn"] button').click();
+    expect(matDialogSpy.close).toHaveBeenCalled();
+    expect(matSnackBarSpy.open).toHaveBeenCalled();
   });
 });

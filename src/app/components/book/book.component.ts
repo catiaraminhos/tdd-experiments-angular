@@ -1,5 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import * as moment from 'moment';
 
 import { HomesService } from 'src/app/services/homes.service';
@@ -17,7 +18,11 @@ export class BookComponent implements OnInit {
 
   checkOut: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) private data: any, private homesService: HomesService) {
+  constructor(
+    @Inject(MAT_DIALOG_DATA) private data: any,
+    private homesService: HomesService,
+    private matDialogRef: MatDialogRef<BookComponent>,
+    private matSnackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -33,6 +38,11 @@ export class BookComponent implements OnInit {
   }
 
   bookHome(): void {
-    this.homesService.bookHome$().subscribe();
+    this.homesService.bookHome$().subscribe(() => {
+      this.matDialogRef.close();
+      this.matSnackBar.open('Home booked!', null, {
+        duration: 2000
+      });
+    });
   }
 }
