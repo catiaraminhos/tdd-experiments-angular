@@ -60,7 +60,7 @@ describe('HomesComponent', () => {
   it('should use dialog service to open a dialog when clicking on Book button', () => {
     const bookButton = getElement('[data-test="home"] [data-test="book-btn"] button');
     const dialogConfig = {
-      width: '250px',
+      width: '500px',
       data: {
         home: HomesMock.homes[0]
        }
