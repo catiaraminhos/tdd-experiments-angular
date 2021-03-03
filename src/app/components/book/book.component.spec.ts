@@ -85,6 +85,21 @@ describe('BookComponent', () => {
     expect(getElement('[data-test="total"]').textContent).toContain('Total: $375');
   });
 
+  it('should show -- for total when there is no check in and no check out date', () => {
+    fixture.detectChanges();
+
+    expect(getElement('[data-test="total"]').textContent).toContain('Total: --');
+  });
+
+  it('should show -- for total when the dates are invalid', () => {
+    setInputValue('[data-test="check-in"] input', '12/23/19');
+    setInputValue('[data-test="check-out"] input', '12/20/19');
+
+    fixture.detectChanges();
+
+    expect(getElement('[data-test="total"]').textContent).toContain('Total: --');
+  });
+
   it('should book home after clicking the Book button', () => {
     homesServiceSpy.bookHome$.and.returnValue(of(null));
 

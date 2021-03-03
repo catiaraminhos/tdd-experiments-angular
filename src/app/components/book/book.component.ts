@@ -29,12 +29,17 @@ export class BookComponent implements OnInit {
     this.home = this.data.home;
   }
 
-  calculateTotal(checkIn: string, checkOut: string): number {
+  calculateTotal(checkIn: string, checkOut: string): string {
     const checkInDate = moment(checkIn, 'MM-DD-YY');
     const checkOutDate = moment(checkOut, 'MM-DD-YY');
     const nrNights = checkOutDate.diff(checkInDate, 'days');
+    const total = nrNights * parseInt(this.home.price, 10);
 
-    return nrNights * parseInt(this.home.price, 10);
+    if (total > 0) {
+      return '$' + total;
+    }
+
+    return '--';
   }
 
   bookHome(): void {
